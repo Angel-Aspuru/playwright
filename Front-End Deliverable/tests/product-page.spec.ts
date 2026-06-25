@@ -25,9 +25,38 @@ test('Add product to cart button should update number badge in cart icon', async
     await expect(productsPage.cartItemsNumber,'there should be two products in the cart').toHaveText('2');
 })
 
+test('Product can be removed from cart after being added to it', async ({page}) => {
+    const productPage = new ProductsPage(page);
+
+    await productPage.clickProductButtonAddOrRemove(products.onesie,'add');
+    await productPage.clickProductButtonAddOrRemove(products.onesie,'remove');
+
+    await expect(productPage.cartItemsNumber, 'there should not be any badge number').toHaveText('');
+})
+
 test('Validate all product cards are visible', async ({page}) => {
     const productsPage = new ProductsPage(page);
 
     await expect(productsPage.productCard,'There should be 6 producst listed').toHaveCount(6);
     await expect(productsPage.productCard,'Products should be visible').toBeVisible();
+})
+
+test('Images of products are visible', async ({page}) => {
+    const productPage = new ProductsPage(page);
+
+    await expect(productPage.productImage, 'there should be 6 images').toHaveCount(6);
+    
+    //I can loop after selecting all elements to verify each on of them are visible because tobevisible only works with one element
+    const images = await productPage.productImage.all();
+    for (const img of images) {
+        await expect(img, 'image of each product should be visible').toBeVisible();
+    }
+})
+
+test('Clicking Harmburguer menu show the four links', async ({page}) => {
+    const productPage = new ProductsPage(page);
+
+    await productPage.openHamburguerMenu();
+
+    await expect(productPage.sideBarItem,'There should be 4 elements in the side bar menu').toHaveCount(4);
 })

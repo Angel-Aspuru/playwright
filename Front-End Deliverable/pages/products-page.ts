@@ -9,6 +9,7 @@ export class ProductsPage {
     private readonly removeProductFromCartButton: Locator;
     private readonly hamburguerMenu: Locator;
     private readonly cartItemsButton: Locator;
+    readonly sideBarItem: Locator;
     readonly productImage: Locator;
 
     constructor(page: Page) {
@@ -21,6 +22,7 @@ export class ProductsPage {
         this.removeProductFromCartButton = page.getByRole('button', { name: 'Remove' });
         this.hamburguerMenu = page.getByRole('button', {name: 'Open Menu'});
         this.productImage = page.getByRole('img');
+        this.sideBarItem = page.locator('.bm-item menu-item')
     }
 
     async openHamburguerMenu() {
