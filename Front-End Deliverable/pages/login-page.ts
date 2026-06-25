@@ -15,7 +15,7 @@ export class LoginPage {
         this.formUsername = page.getByPlaceholder('Username');
         this.formPassword = page.getByPlaceholder('Password');
         this.formLoginButton = page.locator('#login-button');
-        this.mainHeader = page.locator('.login-logo');
+        this.mainHeader = page.locator('.login_logo');
         this.incorrentUserAlert = page.getByRole('heading', {level: 3}).filter({hasText: 'Username and password do not match'});
         this.lockedOutUserAlert = page.getByRole('heading', {level: 3}).filter({hasText: 'locked out'});
         this.closeLoginAlertButton = page.getByRole('heading', {level: 3}).getByRole('button');

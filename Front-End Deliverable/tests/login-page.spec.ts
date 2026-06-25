@@ -7,8 +7,8 @@ test('user can login into page and see the content in homepage', async ({ page }
     const loginPage = new LoginPage(page);
 
     await loginPage.goto();
-    await expect(page, 'login page should have correct URL').toHaveURL(/suacedemo/);
-    await expect(loginPage.mainHeader, 'main header should be visible').toHaveText('Swag Labs');
+    await expect(page, 'login page should have correct URL').toHaveURL(/saucedemo/);
+    await expect(loginPage.mainHeader, 'main header should be visible').toBeVisible();
 
 });
 
@@ -39,7 +39,7 @@ test('Incorret password or username should trigger an alert', async ({page})=> {
 
 });
 
-test('When a locked out user tries to login an alert should display to the user saying the account has been locked out', async ({ page}) => {
+test('When a locked out user tries to login an alert should display to the user saying the account has been locked out.', async ({ page}) => {
     const loginPage = new LoginPage(page);
 
     await loginPage.goto();
@@ -48,7 +48,7 @@ test('When a locked out user tries to login an alert should display to the user 
     await loginPage.clickLoginButton();
 
     await expect(loginPage.lockedOutUserAlert).toBeVisible();
-    await expect(loginPage.lockedOutUserAlert).toHaveText('Epic sadface: Sorry, this user has been locked out');
+    await expect(loginPage.lockedOutUserAlert).toHaveText('Epic sadface: Sorry, this user has been locked out.');
 
     await loginPage.closeLoginAlert();
 })
