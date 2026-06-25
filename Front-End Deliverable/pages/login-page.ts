@@ -1,4 +1,4 @@
-import type {Page, Locator} from '@playwright/test';
+import type { Page, Locator } from '@playwright/test';
 
 export class LoginPage {
     private readonly page: Page;
@@ -10,15 +10,15 @@ export class LoginPage {
     readonly lockedOutUserAlert: Locator;
     private readonly closeLoginAlertButton: Locator;
 
-    constructor (page: Page){
-        this.page= page;
+    constructor(page: Page) {
+        this.page = page;
         this.formUsername = page.getByPlaceholder('Username');
         this.formPassword = page.getByPlaceholder('Password');
         this.formLoginButton = page.locator('#login-button');
         this.mainHeader = page.locator('.login_logo');
-        this.incorrentUserAlert = page.getByRole('heading', {level: 3}).filter({hasText: 'Username and password do not match'});
-        this.lockedOutUserAlert = page.getByRole('heading', {level: 3}).filter({hasText: 'locked out'});
-        this.closeLoginAlertButton = page.getByRole('heading', {level: 3}).getByRole('button');
+        this.incorrentUserAlert = page.getByRole('heading', { level: 3 }).filter({ hasText: 'Username and password do not match' });
+        this.lockedOutUserAlert = page.getByRole('heading', { level: 3 }).filter({ hasText: 'locked out' });
+        this.closeLoginAlertButton = page.getByRole('heading', { level: 3 }).getByRole('button');
     }
 
     async goto() {

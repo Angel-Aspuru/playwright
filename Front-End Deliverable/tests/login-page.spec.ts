@@ -21,10 +21,10 @@ test('When user enters correct credential it should login into the intentory pag
     await loginPage.fillPassword(testUsers.standar.password);
     await loginPage.clickLoginButton();
 
-    await expect(productsPage.productsLogo,'Product logo should be visible after loggin in').toBeVisible();
+    await expect(productsPage.productsLogo, 'Product logo should be visible after loggin in').toBeVisible();
 });
 
-test('Incorret password or username should trigger an alert', async ({page})=> {
+test('Incorret password or username should trigger an alert', async ({ page }) => {
     const loginPage = new LoginPage(page);
 
     await loginPage.goto();
@@ -39,7 +39,7 @@ test('Incorret password or username should trigger an alert', async ({page})=> {
 
 });
 
-test('When a locked out user tries to login an alert should display to the user saying the account has been locked out.', async ({ page}) => {
+test('When a locked out user tries to login an alert should display to the user saying the account has been locked out.', async ({ page }) => {
     const loginPage = new LoginPage(page);
 
     await loginPage.goto();
