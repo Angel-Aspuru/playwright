@@ -22,7 +22,7 @@ export class ProductsPage {
         this.removeProductFromCartButton = page.getByRole('button', { name: 'Remove' });
         this.hamburguerMenu = page.getByRole('button', {name: 'Open Menu'});
         this.productImage = page.getByRole('img');
-        this.sideBarItem = page.locator('.bm-item menu-item')
+        this.sideBarItem = page.locator('.bm-item, .menu-item')
     }
 
     async openHamburguerMenu() {

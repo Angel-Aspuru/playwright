@@ -17,8 +17,8 @@ test('When user enters correct credential it should login into the intentory pag
     const productsPage = new ProductsPage(page);
 
     await loginPage.goto();
-    await loginPage.fillUsername(testUsers.standar.username);
-    await loginPage.fillPassword(testUsers.standar.password);
+    await loginPage.fillUsername(testUsers.standard.username);
+    await loginPage.fillPassword(testUsers.standard.password);
     await loginPage.clickLoginButton();
 
     await expect(productsPage.productsLogo, 'Product logo should be visible after loggin in').toBeVisible();
@@ -28,7 +28,7 @@ test('Incorret password or username should trigger an alert', async ({ page }) =
     const loginPage = new LoginPage(page);
 
     await loginPage.goto();
-    await loginPage.fillUsername(testUsers.standar.username);
+    await loginPage.fillUsername(testUsers.standard.username);
     await loginPage.fillPassword('WrongPassword');
     await loginPage.clickLoginButton();
 

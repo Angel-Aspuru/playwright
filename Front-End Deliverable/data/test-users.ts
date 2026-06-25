@@ -4,7 +4,7 @@ interface User {
 }
 
 interface UserCollection {
-    standar: User,
+    standard: User,
     lockout: User,
     problem: User,
     performance_glitch: User,
@@ -13,7 +13,7 @@ interface UserCollection {
 }
 
 export const testUsers: UserCollection = {
-    standar: {username: 'standard_user', password: 'secret_sauce'},
+    standard: {username: 'standard_user', password: 'secret_sauce'},
     lockout: {username: 'locked_out_user', password: 'secret_sauce'},
     problem: {username: 'problem_user', password: 'secret_sauce'},
     performance_glitch: {username: 'performance_glitch_user', password: 'secret_sauce'},
