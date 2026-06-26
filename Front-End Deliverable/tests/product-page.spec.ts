@@ -63,4 +63,4 @@ test('Clicking Harmburguer menu show the four links', async ({ page }) => {
     await productPage.openHamburguerMenu();
 
     await expect(productPage.sideBarItem, 'There should be 4 elements in the side bar menu').toHaveCount(4);
-})
+})  

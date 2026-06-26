@@ -21,7 +21,7 @@ export class ProductsPage {
         this.addProductToCartButton = page.getByRole('button', { name: 'Add to cart' });
         this.removeProductFromCartButton = page.getByRole('button', { name: 'Remove' });
         this.hamburguerMenu = page.getByRole('button', {name: 'Open Menu'});
-        this.productImage = page.getByRole('img');
+        this.productImage = page.getByRole('link').filter({has: page.getByRole('img')});
         this.sideBarItem = page.locator('.bm-item, .menu-item')
     }
 
@@ -33,8 +33,8 @@ export class ProductsPage {
         const button = action === 'add' ? this.addProductToCartButton : this.removeProductFromCartButton;
 
         await button
-            //filtering the buttons of all products and then selecting the one that contains the product keyword. "*=" means contain 
-            .filter({ has: this.page.locator(`[id*="${product}"]`) })
+            //narrows the locator to elements that match both conditions — so it finds a button named "Add to cart" that also has an id containing  the product
+            .and(this.page.locator(`[id*="${product}"]`))
             .click();
     };
 
