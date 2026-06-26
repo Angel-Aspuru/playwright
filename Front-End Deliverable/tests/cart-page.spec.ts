@@ -1,9 +1,9 @@
 import { expect, test } from "@playwright/test";
-import { LoginPage } from "../pages/login-page";
 import { ProductsPage } from "../pages/products-page";
-import { testUsers } from "../data/test-users";
 import { CartPage } from "../pages/cart-page";
 import { products } from "../data/product-data";
+import { LoginPage } from "../pages/login-page";
+import { testUsers } from "../data/test-users";
 
 
 test.beforeEach(async ({ page }) => {
@@ -22,5 +22,26 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('Clicking "Remove" button in the cart removes the item from it', async ({page}) => {
+    const cartPage = new CartPage(page);
+    
+    await cartPage.clickRemoveProductButton(products.jacket);
 
-})
+    await expect(cartPage.cartItem,'Clicking the remove ite').not.toBeVisible();
+});
+
+test('Clicking "Continue Shopping" button got back to the Products page', async ({page}) => {
+    const cartPage = new CartPage(page);
+
+    await cartPage.clickContinueShoppingButton();
+
+    await expect(page,'Page should go to the products page').toHaveURL(/inventory/);
+});
+
+//this test will fail just to show the trace on fail and screenshots
+test('Clicking "Checkout" button goes to the checkout page', async ({page}) => {
+    const cartPage = new CartPage(page);
+
+    await cartPage.clickCheckoutButton();
+
+    await expect(page, 'Page should go to the step one checkout process').toHaveURL(/checkout-step-ones/);
+});
