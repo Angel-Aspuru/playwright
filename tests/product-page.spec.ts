@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../pages/login-page';
-import { testUsers } from '../data/test-users';
-import { ProductsPage } from '../pages/products-page';
-import { products } from '../data/product-data';
+import { LoginPage } from '../Front-End Deliverable/pages/login-page';
+import { testUsers } from '../Front-End Deliverable/data/test-users';
+import { ProductsPage } from '../Front-End Deliverable/pages/products-page';
+import { products } from '../Front-End Deliverable/data/product-data';
 
 test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);

@@ -1,9 +1,9 @@
 import { expect, test } from "@playwright/test";
-import { ProductsPage } from "../pages/products-page";
-import { CartPage } from "../pages/cart-page";
-import { products } from "../data/product-data";
-import { LoginPage } from "../pages/login-page";
-import { testUsers } from "../data/test-users";
+import { ProductsPage } from "../Front-End Deliverable/pages/products-page";
+import { CartPage } from "../Front-End Deliverable/pages/cart-page";
+import { products } from "../Front-End Deliverable/data/product-data";
+import { LoginPage } from "../Front-End Deliverable/pages/login-page";
+import { testUsers } from "../Front-End Deliverable/data/test-users";
 
 
 test.beforeEach(async ({ page }) => {
