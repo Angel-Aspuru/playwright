@@ -1,0 +1,4 @@
+endpoint,statusCode
+/objects,200
+/objects/1,200
+/objects/9999999,404
