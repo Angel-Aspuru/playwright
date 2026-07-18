@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
-import { LoginPage } from "../pages/login-page";
-import { ProductsPage } from "../pages/products-page";
-import { testUsers } from "../data/test-users";
+import { LoginPage } from "../../pages/login-page";
+import { ProductsPage } from "../../pages/products-page";
+import { testUsers } from "../../data/test-users";
 
 test('user can login into page and see the content in homepage', async ({ page }) => {
     const loginPage = new LoginPage(page);
