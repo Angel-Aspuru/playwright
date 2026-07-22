@@ -126,3 +126,5 @@ INSERT INTO boletos VALUES
 (18,10,5,1),
 (19,11,6,3),
 (20,12,1,2);
+
+Select * FROM clientes;
