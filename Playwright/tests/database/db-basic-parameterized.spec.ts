@@ -21,4 +21,4 @@ test('Furia extrema sold the expected number of tickets', async () => {
     const total = await getTotalBoletosVendidos('Furia Extrema');
 
     expect(total).toBe(4);
-})
+});
