@@ -1,4 +1,4 @@
-CREATE DATABASE practica_sql_cine;
+--CREATE DATABASE practica_sql_cine;
 
 -- Clientes (espectadores que compran boletos)
 CREATE TABLE clientes (
@@ -15,7 +15,7 @@ CREATE TABLE generos (
 );
 
 -- Películas 
-CREATE TABLE peliculas
+CREATE TABLE peliculas (
   pelicula_id INT PRIMARY KEY,
   nombre_pelicula VARCHAR(100),
   genero_id INT,

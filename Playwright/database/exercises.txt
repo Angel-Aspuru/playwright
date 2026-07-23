@@ -1,0 +1,31 @@
+WHERE clauses
+
+1. Find all clients who live in "Madrid".
+2. Find all movies with a precio greater than 9.00.
+3. Find all purchases (compras) made after '2024-02-01'.
+4. Find all movies that belong to the "Terror" genre (using genero_id directly, no join).
+
+JOIN types
+5. List each purchase along with the customer's name (clientes + compras).
+6. List each ticket (boletos) along with the movie name it belongs to.
+7. List every movie along with its genre name, including movies that might not have a matching genre (use a LEFT JOIN).
+8. List every genre along with any movies in that genre, including genres that have no movies at all (use a LEFT JOIN, think about which table goes first).
+9. Combine clientes, compras, boletos, and peliculas in one query to show: customer name, movie name, and quantity purchased.
+
+Aggregate functions
+10. Count how many customers are registered in total.
+11. Find the average ticket price (precio) across all movies.
+12. Find the most expensive movie (MAX).
+13. Find the total quantity of tickets sold across all boletos.
+
+GROUP BY
+14. Show the total number of movies per genre.
+15. Show the total quantity of tickets sold per movie.
+16. Show the total quantity of tickets sold per customer.
+17. Show the total amount spent (price × quantity) per customer.
+18. Show the number of purchases made per city (clientes.ciudad).
+
+Combined (WHERE + GROUP BY + HAVING)
+19. Show genres that have more than 2 movies.
+20. Show customers who have bought more than 3 tickets in total.
+21. Show movies that have sold more than 2 tickets, ordered from highest to lowest quantity.
