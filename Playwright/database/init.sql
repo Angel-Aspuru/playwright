@@ -248,3 +248,52 @@ left join boletos b on p.pelicula_id = b.pelicula_id
 group by p.nombre_pelicula
 having sum(b.cantidad) > 2
 order by total_boletos_vendidos desc;
+
+----------------------------------------------------------------------------------
+--Indexes
+----------------------------------------------------------------------------------
+CREATE INDEX idx_boletos_compra ON boletos(compra_id);
+
+EXPLAIN ANALYZE
+SELECT * FROM boletos WHERE compra_id = 4;
+----------------------------------------------------------------------------------
+--Windows functions
+----------------------------------------------------------------------------------
+--Each customer's most recent compra
+SELECT * FROM (
+  SELECT
+    cliente_id,
+    compra_id,
+    fecha_compra,
+    ROW_NUMBER() OVER (PARTITION BY cliente_id ORDER BY fecha_compra DESC) AS numero_compra_reciente
+  FROM compras
+) ranked
+WHERE numero_compra_reciente = 1;
+--time between consecutive compras per cliente
+SELECT
+  cliente_id,
+  compra_id,
+  fecha_compra,
+  LAG(fecha_compra) OVER (PARTITION BY cliente_id ORDER BY fecha_compra) AS fecha_compra_anterior,
+  fecha_compra - LAG(fecha_compra) OVER (PARTITION BY cliente_id ORDER BY fecha_compra) AS dias_entre_compras
+FROM compras
+ORDER BY cliente_id, fecha_compra;
+----------------------------------------------------------------------------------
+--CTE (Common Table Expressions)
+----------------------------------------------------------------------------------
+--Combining a CTE with an aggregate
+WITH gasto_por_cliente AS (
+  SELECT
+    cl.cliente_id,
+    cl.nombre,
+    SUM(p.precio * b.cantidad) AS total_gastado
+  FROM clientes cl
+  JOIN compras c ON cl.cliente_id = c.cliente_id
+  JOIN boletos b ON c.compra_id = b.compra_id
+  JOIN peliculas p ON b.pelicula_id = p.pelicula_id
+  GROUP BY cl.cliente_id, cl.nombre
+)
+SELECT nombre, total_gastado
+FROM gasto_por_cliente
+WHERE total_gastado > 20
+ORDER BY total_gastado DESC;

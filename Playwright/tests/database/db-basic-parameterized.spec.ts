@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { closePool } from '../../utils/db';
-import { getClienteByName, getPeliculasByGenero, getTotalBoletosVendidos } from '../../utils/queries';
+import { getClienteByName, getPeliculasByGenero, getTotalBoletosVendidos } from '../../utils/parameterized-queries';
 
 test.afterAll(async () => {
     await closePool();
