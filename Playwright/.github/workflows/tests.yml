@@ -13,9 +13,9 @@ jobs:
       postgres:
         image: postgres:16
         env:
-          POSTGRES_USER: cine_user
-          POSTGRES_PASSWORD: cine_pass
-          POSTGRES_DB: practica_sql_cine
+          POSTGRES_USER: ${{ secrets.DB_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.DB_NAME }}
         ports:
           - 5432:5432
         options: >-
@@ -44,7 +44,15 @@ jobs:
           sudo apt-get install -y postgresql-client
           psql -h localhost -U cine_user -d practica_sql_cine -f database/init.sql
         env:
-          PGPASSWORD: cine_pass
+          PGPASSWORD: ${{ secrets.DB_PASSWORD }}
 
       - name: Run Playwright tests
         run: npx playwright test --config=tests/playwright.config.ts --project=chromium --grep @db-tests
+      
+      - name: Upload HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
