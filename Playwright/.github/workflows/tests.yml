@@ -1,0 +1,50 @@
+name: Run Playwright DB Tests
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: cine_user
+          POSTGRES_PASSWORD: cine_pass
+          POSTGRES_DB: practica_sql_cine
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Load database schema and seed data
+        run: |
+          sudo apt-get install -y postgresql-client
+          psql -h localhost -U cine_user -d practica_sql_cine -f database/init.sql
+        env:
+          PGPASSWORD: cine_pass
+
+      - name: Run Playwright tests
+        run: npx playwright test --config=tests/playwright.config.ts --project=chromium --grep @db-tests
