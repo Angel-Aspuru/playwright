@@ -14,12 +14,14 @@ test('user can login into page and see the content in homepage', async ({ page }
 
 test('When user enters correct credential it should login into the intentory page', async ({ page }) => {
     const loginPage = new LoginPage(page);
-    const productsPage = new ProductsPage(page);
+    // const productsPage = new ProductsPage(page); // no need for this
 
-    await loginPage.goto();
-    await loginPage.fillUsername(testUsers.standard.username);
-    await loginPage.fillPassword(testUsers.standard.password);
-    await loginPage.clickLoginButton();
+    await loginPage.goto(); 
+    //since login now is a factory method is now permis the flow and hands back the next page object
+    // await loginPage.fillUsername(testUsers.standard.username);
+    // await loginPage.fillPassword(testUsers.standard.password);
+    // await loginPage.clickLoginButton();
+    const productsPage = await loginPage.login(testUsers.standard.username, testUsers.standard.password);
 
     await expect(productsPage.productsLogo, 'Product logo should be visible after loggin in').toBeVisible();
 });
@@ -27,6 +29,7 @@ test('When user enters correct credential it should login into the intentory pag
 test('Incorret password or username should trigger an alert', async ({ page }) => {
     const loginPage = new LoginPage(page);
 
+    // Failure path stays on LoginPage, so we use the granular methods instead of login().
     await loginPage.goto();
     await loginPage.fillUsername(testUsers.standard.username);
     await loginPage.fillPassword('WrongPassword');
