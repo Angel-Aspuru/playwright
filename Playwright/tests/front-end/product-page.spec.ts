@@ -3,16 +3,14 @@ import { LoginPage } from '../../pages/login-page';
 import { testUsers } from '../../data/test-users';
 import { ProductsPage } from '../../pages/products-page';
 import { products } from '../../data/product-data';
+import { Header } from '../../pages/header-component';
 
 test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
-    const productsPage = new ProductsPage(page);
-
+ 
     await loginPage.goto();
-    await loginPage.fillUsername(testUsers.standard.username);
-    await loginPage.fillPassword(testUsers.standard.password);
-    await loginPage.clickLoginButton();
-
+    const productsPage = await loginPage.login(testUsers.standard.username, testUsers.standard.password);
+ 
     await expect(productsPage.productsLogo, 'Login before each products page test should be succesfull').toBeVisible();
 });
 
@@ -58,9 +56,9 @@ test('Images of products are visible', async ({ page }) => {
 })
 
 test('Clicking Harmburguer menu show the four links', async ({ page }) => {
-    const productPage = new ProductsPage(page);
+    const header = new Header(page);
 
-    await productPage.openHamburguerMenu();
+    await header.openMenu();
 
-    await expect(productPage.sideBarItem, 'There should be 4 elements in the side bar menu').toHaveCount(4);
+    await expect(header.sideBarItems, 'There should be 4 elements in the side bar menu').toHaveCount(4);
 })  
