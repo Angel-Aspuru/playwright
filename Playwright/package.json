@@ -9,9 +9,11 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "@cucumber/cucumber": "^13.2.1",
     "@playwright/test": "^1.61.1",
     "@types/node": "^26.0.0",
-    "@types/pg": "^8.20.0"
+    "@types/pg": "^8.20.0",
+    "ts-node": "^10.9.2"
   },
   "dependencies": {
     "csv-parse": "^7.0.1",
